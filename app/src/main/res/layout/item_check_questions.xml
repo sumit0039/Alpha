@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/bg_rounded_1_no_padding"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvQues"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="8dp"
+            android:text="Q. 1  What is the fiber? Explain in detail."
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_light" />
+
+        <TextView
+            android:id="@+id/tvAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:justificationMode="inter_word"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="8dp"
+            android:text="@string/dummy_data"
+            android:textColor="@color/grey_light2"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_light" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="8dp">
+
+
+            <TextView
+                android:id="@+id/tvCorrect"
+                android:layout_width="90dp"
+                android:layout_height="28dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="@drawable/bg_button"
+                android:backgroundTint="@color/light_green"
+                android:gravity="center"
+                android:padding="0dp"
+                android:text="@string/correct"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvWrong"
+                android:layout_width="90dp"
+                android:layout_height="28dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="@drawable/bg_button"
+                android:backgroundTint="@color/light_red"
+                android:gravity="center"
+                android:padding="0dp"
+                android:text="@string/wrong"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+       <!-- <LinearLayout
+            android:id="@+id/llGivenMarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingBottom="4dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/given_marks"
+                android:textColor="@color/grey_light2"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvGivenMarks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="5"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>-->
+
+    </LinearLayout>
+</layout>
+
+
+

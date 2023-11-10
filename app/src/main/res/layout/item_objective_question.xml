@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvQues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="start"
+        android:paddingVertical="8dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit ?"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbOption1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="8dp"
+            android:text="Lorem ipsum dolor sit amet "
+            android:textColor="@color/grey_light2"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rbOption2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="8dp"
+            android:text="Lorem ipsum dolor sit amet "
+            android:textColor="@color/grey_light2"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rbOption3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:paddingHorizontal="8dp"
+            android:text="Lorem ipsum dolor sit amet "
+            android:textColor="@color/grey_light2"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rbOption4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:paddingHorizontal="8dp"
+            android:text="Lorem ipsum dolor sit amet "
+            android:textColor="@color/grey_light2"
+            android:textSize="18sp" />
+
+    </RadioGroup>
+
+
+</LinearLayout>
+
+
+

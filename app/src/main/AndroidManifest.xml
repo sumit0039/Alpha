@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.softwill.alpha">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+
+    <application
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
+        android:hasFragileUserData="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Alpha"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup"
+        tools:targetApi="31">
+        <activity
+            android:name=".career.mack_exam.activity.SearchResultMockExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.rate.RateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.mack_exam.activity.MockExamResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.mack_exam.activity.SearchMockExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.library.activity.SearchLibraryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.best_college.activity.SearchBestCollegeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.entrance_exam.activity.SearchEntranceExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.career_guidance.activity.SearchCareerGuidanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.entrance_exam.activity.EntranceExamDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile_guest.activity.ConnectionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".home.activity.SearchHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.assignment.student.activity.AssignmentQuestionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.assignment.teacher.activity.CheckAssignmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.assignment.teacher.activity.CreateAssignmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.assignment.student.activity.StudentAssignmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.assignment.teacher.activity.TeacherAssignmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.online_exam.student.activity.StudentExam2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.online_exam.student.activity.StudentExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.assignment.teacher.activity.ViewQuestionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.online_exam.teacher.activity.CreateExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.online_exam.teacher.activity.TeacherExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".help.HelpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.library.activity.ReadBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.library.activity.SavedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.library.activity.LibraryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.attendance.activity.AttendanceTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.attendance.activity.AttendanceStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.report_card.activity.ReportCardTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.report_card.activity.ReportCardStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.sport.activity.ParticipantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.sport.activity.ExhibitionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.sport.activity.OpportunityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.sport.activity.AccessoriesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.sport.activity.CompetitionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.sport.activity.TeamSportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.sport.activity.SportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.complaint.ComplaintActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.canteen.activity.FacilitiesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.canteen.activity.MenuCardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.canteen.activity.TeamCanteenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.culture.activity.GalleryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.culture.activity.TripActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.culture.activity.SponsorsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.culture.activity.CalendarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.culture.activity.TeamCultureActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.transport.activity.TrackBusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.transport.activity.TransportDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.transport.activity.FeesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.transport.activity.TeamTransportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.transport.activity.TransportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.culture.activity.CultureActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.canteen.activity.CanteenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.classes.activity.StudentDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.classes.activity.ClassesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.lecture.activity.LectureActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute.timetable.activity.TimeTableActivity"
+            android:exported="false" />
+        <activity
+            android:name=".institute_detail.CollegeDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.best_college.activity.FavoriteCollegeActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".career.best_college.activity.BestCollegeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.mack_exam.activity.MackExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.entrance_exam.activity.EntranceExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.education_loan.EducationLoanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.career_guidance.activity.CareerGuidanceDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".career.career_guidance.activity.CareerGuidanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".chat.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.softwill.alpha.institute.diary.DiaryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".notification.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.editProfile.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.activity.ActivityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.setting.SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.privacy.manageNotifications.ManageNotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.privacy.blockedPeople.BlockedPeopleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.privacy.PrivacyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.post.PostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile_guest.activity.ProfileGuestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".dashboard.DashboardActivity"
+            android:exported="true" />
+        <activity
+            android:name=".signUp.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".otp.OTPActivity"
+            android:exported="false" />
+        <activity
+            android:name=".signIn.SignInActivity"
+            android:exported="true" />
+        <activity
+            android:name=".splash.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

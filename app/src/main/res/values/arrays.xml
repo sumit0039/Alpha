@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="YearType">
+        <item>2023</item>
+    </string-array>
+
+
+    <string-array name="monthType">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+
+    <string-array name="FacultyType">
+        <item>Faculty 1</item>
+        <item>Faculty 2</item>
+        <item>Faculty 3</item>
+        <item>Faculty 4</item>
+    </string-array>
+
+    <string-array name="StreamType">
+        <item>Stream 1</item>
+        <item>Stream 2</item>
+        <item>Stream 3</item>
+        <item>Stream 4</item>
+    </string-array>
+
+
+    <string-array name="StateType">
+        <item>Madhya Pradesh</item>
+        <item>Uttar pradesh</item>
+        <item>Maharashtra</item>
+        <item>Goa</item>
+    </string-array>
+
+    <string-array name="BloodGroup">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>O+</item>
+        <item>O-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvQues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="start"
+        android:paddingVertical="8dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit ?"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:gravity="start"
+        android:text="@string/your_answer"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+
+    <EditText
+        android:id="@+id/etAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_rounded_1"
+        android:gravity="start"
+        android:hint="Write answer here"
+        android:inputType="textMultiLine"
+        android:minHeight="250dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey_light2"
+        android:textSize="18sp" />
+
+
+</LinearLayout>
+
+
+
