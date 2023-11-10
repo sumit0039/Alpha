@@ -482,6 +482,8 @@ class SignUpActivity : AppCompatActivity() {
         })
     }
 
+    /*Hi Sumit*/
+
     private fun apiTeacherRegister(firstName: String, lastName: String) {
         val jsonObject = JsonObject().apply {
             addProperty("firstName", firstName)
