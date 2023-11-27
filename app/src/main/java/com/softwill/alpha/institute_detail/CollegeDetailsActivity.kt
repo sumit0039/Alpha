@@ -1,12 +1,18 @@
 package com.softwill.alpha.institute_detail
 
 import android.annotation.SuppressLint
+import android.app.DownloadManager
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.Html
 import android.view.*
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,12 +23,14 @@ import com.softwill.alpha.R
 import com.softwill.alpha.databinding.ActivityCollegeDetailsBinding
 import com.softwill.alpha.institute_detail.adapter.*
 import com.softwill.alpha.institute_detail.model.*
+import com.softwill.alpha.institute_detail.model.instituteDetailsModel.InstituteDetailsResponse
 import com.softwill.alpha.networking.RetrofitClient
 import com.softwill.alpha.utils.UtilsFunctions
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -83,32 +91,58 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
                     val responseJson = response.body()?.string()
-                    val instituteDetail =
-                        Gson().fromJson(responseJson, InstituteDetailModel::class.java)
+                    val instituteDetail = Gson().fromJson(responseJson, InstituteDetailsResponse::class.java)
 
 
                     binding.tvCollegeName.text = instituteDetail.instituteName
-                    binding.tvState.text = instituteDetail.state
+                    binding.tvInfoEmail.text = instituteDetail.email
+                    binding.tvInfoPhone.text = instituteDetail.mobile
+                    binding.tvInfoAddress.text = instituteDetail.address
+                    binding.tvInfoWebsite.text = Html.fromHtml(instituteDetail.institute.website)
+                    binding.tvInfoWebsite.setOnClickListener {
+                        val uri = Uri.parse(instituteDetail.institute.website) // missing 'http://' will cause crashed
+                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                        startActivity(intent)
+                    }
+                    binding.tvInfoAboutUs.text = instituteDetail.institute.aboutUs
+                    binding.placementProgressBar.setProgress(instituteDetail.institute.placementRating.toInt())
+                    binding.tvPlacementRate.text = instituteDetail.institute.placementRating.toString()
+                    binding.staffProgressBar.setProgress(instituteDetail.institute.staffRating.toInt())
+                    binding.tvStaffRate.text = instituteDetail.institute.staffRating.toString()
+                    binding.teachingProgressBar.setProgress(instituteDetail.institute.teachingRating.toInt())
+                    binding.tvTeachingRate.text = instituteDetail.institute.teachingRating.toString()
+                    binding.enviromentProgressBar.setProgress(instituteDetail.institute.environmentRating.toInt())
+                    binding.tvEnviromentRate.text = instituteDetail.institute.environmentRating.toString()
+                    binding.downloadBrocher.setOnClickListener {
+                        var download= getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                        var PdfUri = Uri.parse(instituteDetail.institute.brochurePath)
+                        var getPdf = DownloadManager.Request(PdfUri)
+                        getPdf.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                        download.enqueue(getPdf)
+                        Toast.makeText(this@CollegeDetailsActivity,"Download Started", Toast.LENGTH_LONG).show()
+                    }
 
 
 
 
-                    Glide.with(this@CollegeDetailsActivity).load(instituteDetail.user?.avatarUrl)
+                    Glide.with(this@CollegeDetailsActivity).load(instituteDetail.avtarUrl)
                         .placeholder(R.drawable.icon_avatar).into(binding.ivProfileImage)
 
-                    if (instituteDetail.instituteRating != null) {
-                        binding.rating.rating = instituteDetail.instituteRating.toFloat()
+                    if (instituteDetail.institute.instituteRating != null) {
+                        binding.rating.rating = instituteDetail.institute.instituteRating.toFloat()
+                        binding.institudeRating.rating = instituteDetail.institute.instituteRating.toFloat()
+                        binding.tvInstitudeRate.text = instituteDetail.institute.instituteRating.toString() + " / " + "5.0"
                     }
 
 
-                    if (!instituteDetail.institute_faculties.isNullOrEmpty()) {
-                        mInstituteFaculties.clear()
-                        mInstituteFaculties.addAll(instituteDetail.institute_faculties)
-                        mFacultyStreamAdapter.notifyDataSetChanged()
-                        binding.rvFacultyStream.visibility = View.VISIBLE
-                    } else {
-                        binding.rvFacultyStream.visibility = View.GONE
-                    }
+//                    if (!instituteDetail.institute.institute_faculties.isNullOrEmpty()) {
+//                        mInstituteFaculties.clear()
+//                        mInstituteFaculties.addAll(instituteDetail.institute_faculties)
+//                        mFacultyStreamAdapter.notifyDataSetChanged()
+//                        binding.rvFacultyStream.visibility = View.VISIBLE
+//                    } else {
+//                        binding.rvFacultyStream.visibility = View.GONE
+//                    }
 
                 } else {
                     UtilsFunctions().handleErrorResponse(response, this@CollegeDetailsActivity)
@@ -200,11 +234,7 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
         when (view?.id) {
             R.id.tvInfo -> {
                 binding.tvInfo.setTextColor(
-                    ContextCompat.getColor(
-                        applicationContext,
-                        R.color.white
-                    )
-                )
+                    ContextCompat.getColor(applicationContext, R.color.white))
                 binding.tvInfo.setBackgroundResource(R.drawable.bg_rounded_3_selected)
                 binding.tvFacultyStream.setTextColor(
                     ContextCompat.getColor(

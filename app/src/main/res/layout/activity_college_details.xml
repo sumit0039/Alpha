@@ -77,7 +77,7 @@
                             android:gravity="center"
                             android:text="@string/title_Connections"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                             android:gravity="center"
                             android:text="222K"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -263,6 +263,7 @@
 
 
                             <TextView
+                                android:id="@+id/tv_info_email"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="left|center"
@@ -295,6 +296,7 @@
 
 
                             <TextView
+                                android:id="@+id/tv_info_phone"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="left|center"
@@ -327,6 +329,7 @@
 
 
                             <TextView
+                                android:id="@+id/tv_info_website"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="left|center"
@@ -359,6 +362,7 @@
 
 
                             <TextView
+                                android:id="@+id/tv_info_address"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="left|center"
@@ -391,6 +395,7 @@
 
 
                             <TextView
+                                android:id="@+id/tv_info_aboutUs"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:elegantTextHeight="true"
@@ -436,6 +441,7 @@
                                 android:textSize="14sp" />
 
                             <ImageView
+                                android:id="@+id/download_brocher"
                                 android:layout_width="30dp"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
@@ -481,17 +487,20 @@
                                     android:layout_height="80dp">
 
                                     <ProgressBar
+                                        android:id="@+id/placement_progress_bar"
                                         style="?android:attr/progressBarStyleHorizontal"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:background="@drawable/circular_shape"
                                         android:indeterminate="false"
-                                        android:progress="72"
+                                        android:progress="4"
+                                        android:max="5"
                                         android:progressDrawable="@drawable/circular_progress_bar"
                                         android:scaleX="-1"
                                         android:textAlignment="center" />
 
                                     <TextView
+                                        android:id="@+id/tv_placement_rate"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerInParent="true"
@@ -510,7 +519,7 @@
                                     android:paddingHorizontal="5dp"
                                     android:text="@string/placement"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -526,17 +535,20 @@
                                     android:layout_height="80dp">
 
                                     <ProgressBar
+                                        android:id="@+id/staff_progress_bar"
                                         style="?android:attr/progressBarStyleHorizontal"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:background="@drawable/circular_shape"
                                         android:indeterminate="false"
-                                        android:progress="82"
+                                        android:progress="2"
+                                        android:max="5"
                                         android:progressDrawable="@drawable/circular_progress_bar"
                                         android:scaleX="-1"
                                         android:textAlignment="center" />
 
                                     <TextView
+                                        android:id="@+id/tv_staff_rate"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerInParent="true"
@@ -555,7 +567,7 @@
                                     android:paddingHorizontal="5dp"
                                     android:text="@string/staff"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -571,17 +583,20 @@
                                     android:layout_height="80dp">
 
                                     <ProgressBar
+                                        android:id="@+id/teaching_progress_bar"
                                         style="?android:attr/progressBarStyleHorizontal"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:background="@drawable/circular_shape"
                                         android:indeterminate="false"
-                                        android:progress="88"
+                                        android:progress="2"
+                                        android:max="5"
                                         android:progressDrawable="@drawable/circular_progress_bar"
                                         android:scaleX="-1"
                                         android:textAlignment="center" />
 
                                     <TextView
+                                        android:id="@+id/tv_teaching_rate"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerInParent="true"
@@ -602,7 +617,7 @@
                                     android:paddingHorizontal="5dp"
                                     android:text="@string/teaching"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -618,17 +633,20 @@
                                     android:layout_height="80dp">
 
                                     <ProgressBar
+                                        android:id="@+id/enviroment_progress_bar"
                                         style="?android:attr/progressBarStyleHorizontal"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:background="@drawable/circular_shape"
                                         android:indeterminate="false"
-                                        android:progress="84"
+                                        android:progress="1"
+                                        android:max="5"
                                         android:progressDrawable="@drawable/circular_progress_bar"
                                         android:scaleX="-1"
                                         android:textAlignment="center" />
 
                                     <TextView
+                                        android:id="@+id/tv_enviroment_rate"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerInParent="true"
@@ -646,7 +664,7 @@
                                     android:gravity="center"
                                     android:text="@string/environment"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
 
                             </LinearLayout>
@@ -656,6 +674,7 @@
 
 
                         <RatingBar
+                            android:id="@+id/institude_rating"
                             style="@style/Widget.AppCompat.RatingBar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -670,6 +689,7 @@
                             android:transformPivotY="40dp" />
 
                         <TextView
+                            android:id="@+id/tv_institude_rate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
