@@ -2,11 +2,13 @@ package com.softwill.alpha.institute_detail
 
 import android.annotation.SuppressLint
 import android.app.DownloadManager
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.*
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -42,7 +44,7 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mOurPartnerAdapter: OurPartnerAdapter
     private lateinit var mSelectedStudentsAdapter: SelectedStudentsAdapter
 
-    private val mList2: ArrayList<EntranceExamItemModel> = ArrayList()
+    private val mList2: ArrayList<EntranceExamResponseItem> = ArrayList()
     private val mList3: ArrayList<FacilitiesItemModel> = ArrayList()
     private var mMyInstitute: Boolean? = false
     private var mInstituteId: Int = 0
@@ -98,6 +100,8 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
                     binding.tvInfoEmail.text = instituteDetail.email
                     binding.tvInfoPhone.text = instituteDetail.mobile
                     binding.tvInfoAddress.text = instituteDetail.address
+                    binding.tvState.text = instituteDetail.stateName
+                    binding.tvConnection.text = instituteDetail.connections.toString()
                     binding.tvInfoWebsite.text = Html.fromHtml(instituteDetail.institute.website)
                     binding.tvInfoWebsite.setOnClickListener {
                         val uri = Uri.parse(instituteDetail.institute.website) // missing 'http://' will cause crashed
@@ -152,6 +156,55 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 t.printStackTrace()
             }
+        })
+    }
+
+    private fun apiEntranceExams(){
+        val call: Call<ResponseBody> = RetrofitClient.getInstance(this@CollegeDetailsActivity).myApi
+            .api_entranceExams()
+        call.enqueue(object : Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful){
+                    val responseJson = response.body()?.string()
+                    val entranceExam = Gson().fromJson(responseJson, Array<EntranceExamResponseItem>::class.java)
+                    mList2.clear()
+                    mList2.addAll(entranceExam)
+
+                    mInstituteEntranceExamAdapter = InstituteEntranceExamAdapter(mList2, this@CollegeDetailsActivity)
+                    binding.rvEntranceExam.adapter = mInstituteEntranceExamAdapter
+                    mInstituteEntranceExamAdapter.notifyDataSetChanged()
+
+                }else {
+                    UtilsFunctions().handleErrorResponse(response, this@CollegeDetailsActivity)
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
+    private fun apiGalleries(){
+        val call: Call<ResponseBody> = RetrofitClient.getInstance(this@CollegeDetailsActivity).myApi
+            .api_Galleries()
+        call.enqueue(object : Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+               if (response.isSuccessful){
+                   val responseJson = response.body()?.string()
+                   val galleriesList = Gson().fromJson(responseJson, Array<GalleriesResponseItem>::class.java)
+                   Log.e(TAG, "onResponseGalleries: "+galleriesList.toString())
+
+               }else {
+                   UtilsFunctions().handleErrorResponse(response, this@CollegeDetailsActivity)
+               }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                t.printStackTrace()
+            }
+
         })
     }
 
@@ -420,17 +473,9 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
                 binding.llGovernanceView.visibility = View.GONE
                 binding.llGalleryView.visibility = View.GONE
 
+                apiEntranceExams()
 
 
-                mList2.clear()
-                mList2.add(EntranceExamItemModel("Medical", false))
-                mList2.add(EntranceExamItemModel("Engineering", false))
-                mList2.add(EntranceExamItemModel("Pharmacy", false))
-                mList2.add(EntranceExamItemModel("Diploma", false))
-
-                mInstituteEntranceExamAdapter = InstituteEntranceExamAdapter(mList2, this)
-                binding.rvEntranceExam.adapter = mInstituteEntranceExamAdapter
-                mInstituteEntranceExamAdapter.notifyDataSetChanged()
             }
 
             R.id.tvFacilities -> {
@@ -694,7 +739,7 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
                 binding.llPlacementView.visibility = View.GONE
                 binding.llGovernanceView.visibility = View.GONE
                 binding.llGalleryView.visibility = View.VISIBLE
-
+                apiGalleries()
                 mCollegeGalleryAdapter = CollegeGalleryAdapter(this)
                 binding.rvGallery.adapter = mCollegeGalleryAdapter
                 mCollegeGalleryAdapter.notifyDataSetChanged()

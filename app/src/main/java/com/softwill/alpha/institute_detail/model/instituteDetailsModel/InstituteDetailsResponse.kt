@@ -11,5 +11,7 @@ data class InstituteDetailsResponse(
     val instituteName: String,
     val mobile: String,
     val stateId: Int,
-    val userName: String
+    val userName: String,
+    val stateName: String,
+    val connections: Int
 )

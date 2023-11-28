@@ -8,10 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.softwill.alpha.institute_detail.model.EntranceExamItemModel
 import com.softwill.alpha.databinding.ItemEntranceExamBinding
+import com.softwill.alpha.institute_detail.model.EntranceExamResponseItem
 
 
 class InstituteEntranceExamAdapter(
-    private var mList: ArrayList<EntranceExamItemModel>,
+    private var mList: ArrayList<EntranceExamResponseItem>,
     private val context: Context
 ) :
     RecyclerView.Adapter<InstituteEntranceExamAdapter.ViewHolder>() {
@@ -37,7 +38,7 @@ class InstituteEntranceExamAdapter(
         with(holder) {
             with(mList[position]) {
 
-                binding.tvName.text = name
+                binding.tvName.text = entranceName
 
                 mInstituteEntranceExam2Adapter = InstituteEntranceExam2Adapter( context)
                 binding.rvEntranceExam2.adapter = mInstituteEntranceExam2Adapter
@@ -77,7 +78,7 @@ class InstituteEntranceExamAdapter(
     }
 
     //Filter New
-    fun filterList(filteredList: ArrayList<EntranceExamItemModel>) {
+    fun filterList(filteredList: ArrayList<EntranceExamResponseItem>) {
         mList = filteredList
         notifyDataSetChanged()
     }
