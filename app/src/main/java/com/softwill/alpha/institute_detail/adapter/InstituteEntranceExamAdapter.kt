@@ -1,6 +1,9 @@
 package com.softwill.alpha.institute_detail.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,22 +41,35 @@ class InstituteEntranceExamAdapter(
         with(holder) {
             with(mList[position]) {
 
-                binding.tvName.text = entranceName
-
-                mInstituteEntranceExam2Adapter = InstituteEntranceExam2Adapter( context)
-                binding.rvEntranceExam2.adapter = mInstituteEntranceExam2Adapter
-                mInstituteEntranceExam2Adapter.notifyDataSetChanged()
-
-                if (isShowing) {
-                    binding.llShow.visibility = View.VISIBLE
-                } else {
-                    binding.llShow.visibility = View.GONE
+                binding.txtTitle.text = entranceName
+                binding.txtExmLink.text = Html.fromHtml(examLink)
+                binding.txtExmLink.setOnClickListener {
+                    val uri = Uri.parse(examLink) // missing 'http://' will cause crashed
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    context.startActivity(intent)
+                }
+                binding.txtExmLink.text = examLink
+                if (merit.equals("")){
+                    binding.txtMerit.text = "0/0"
+                }else{
+                    binding.txtMerit.text = merit
                 }
 
-                binding.llTop.setOnClickListener {
-                    isShowing = !isShowing
-                    notifyDataSetChanged()
-                }
+
+//                mInstituteEntranceExam2Adapter = InstituteEntranceExam2Adapter( context)
+//                binding.rvEntranceExam2.adapter = mInstituteEntranceExam2Adapter
+//                mInstituteEntranceExam2Adapter.notifyDataSetChanged()
+//
+//                if (isShowing) {
+//                    binding.llShow.visibility = View.VISIBLE
+//                } else {
+//                    binding.llShow.visibility = View.GONE
+//                }
+//
+//                binding.llTop.setOnClickListener {
+//                    isShowing = !isShowing
+//                    notifyDataSetChanged()
+//                }
 
             }
         }

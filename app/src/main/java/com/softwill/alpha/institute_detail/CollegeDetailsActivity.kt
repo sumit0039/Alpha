@@ -19,13 +19,17 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.softwill.alpha.R
 import com.softwill.alpha.databinding.ActivityCollegeDetailsBinding
 import com.softwill.alpha.institute_detail.adapter.*
 import com.softwill.alpha.institute_detail.model.*
+import com.softwill.alpha.institute_detail.model.facilities.FacilitiesResponseItem
 import com.softwill.alpha.institute_detail.model.instituteDetailsModel.InstituteDetailsResponse
+import com.softwill.alpha.institute_detail.model.placement.PlacementCompaniesResponseItem
+import com.softwill.alpha.institute_detail.model.placement.PlacementStudentsResponseItem
 import com.softwill.alpha.networking.RetrofitClient
 import com.softwill.alpha.utils.UtilsFunctions
 import okhttp3.ResponseBody
@@ -45,9 +49,13 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mSelectedStudentsAdapter: SelectedStudentsAdapter
 
     private val mList2: ArrayList<EntranceExamResponseItem> = ArrayList()
-    private val mList3: ArrayList<FacilitiesItemModel> = ArrayList()
+    private val mList3: ArrayList<FacilitiesResponseItem> = ArrayList()
+    private val partnerList: ArrayList<PlacementCompaniesResponseItem> = ArrayList()
+    private val studentsList: ArrayList<PlacementStudentsResponseItem> = ArrayList()
+    private val galleriesList: ArrayList<GalleriesResponseItem> = ArrayList()
     private var mMyInstitute: Boolean? = false
     private var mInstituteId: Int = 0
+    private var instituteId: Int = 0
 
     private val mInstituteFaculties: ArrayList<InstituteFacultyModel> = ArrayList()
 
@@ -95,7 +103,7 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
                     val responseJson = response.body()?.string()
                     val instituteDetail = Gson().fromJson(responseJson, InstituteDetailsResponse::class.java)
 
-
+                    instituteId = instituteDetail.institute.id
                     binding.tvCollegeName.text = instituteDetail.instituteName
                     binding.tvInfoEmail.text = instituteDetail.email
                     binding.tvInfoPhone.text = instituteDetail.mobile
@@ -186,6 +194,82 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
+    private fun apiFacilities(){
+        val call: Call<ResponseBody> = RetrofitClient.getInstance(this@CollegeDetailsActivity).myApi
+            .api_facilities()
+        call.enqueue(object : Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+              if (response.isSuccessful){
+                  val responseJson = response.body()?.string()
+                  val facilitiesList = Gson().fromJson(responseJson, Array<FacilitiesResponseItem>::class.java)
+                  mList3.clear()
+                  mList3.addAll(facilitiesList)
+                  mFacilitiesAdapter = FacilitiesAdapter(mList3, this@CollegeDetailsActivity)
+                  binding.rvFacilities.adapter = mFacilitiesAdapter
+                  mFacilitiesAdapter.notifyDataSetChanged()
+              }else {
+                  UtilsFunctions().handleErrorResponse(response, this@CollegeDetailsActivity)
+              }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
+    private fun apiOurPartners(){
+        val call : Call<ResponseBody> = RetrofitClient.getInstance(this@CollegeDetailsActivity).myApi
+            .api_Our_Partners()
+        call.enqueue(object : Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful){
+                    val responseJson = response.body()?.string()
+                    val ourPartnersList = Gson().fromJson(responseJson,Array<PlacementCompaniesResponseItem>::class.java)
+                    partnerList.clear()
+                    partnerList.addAll(ourPartnersList)
+                    mOurPartnerAdapter = OurPartnerAdapter(partnerList,this@CollegeDetailsActivity)
+                    binding.rvOurPartner.layoutManager = GridLayoutManager(this@CollegeDetailsActivity,3)
+                    binding.rvOurPartner.adapter = mOurPartnerAdapter
+                    mOurPartnerAdapter.notifyDataSetChanged()
+                }else {
+                    UtilsFunctions().handleErrorResponse(response, this@CollegeDetailsActivity)
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
+    private fun apiStudents(){
+        val call : Call<ResponseBody> = RetrofitClient.getInstance(this@CollegeDetailsActivity).myApi
+            .api_Students(instituteId)
+        call.enqueue(object : Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful){
+                    binding.llPlacementView.visibility = View.VISIBLE
+                    val responseJson = response.body()?.string()
+                    val selectedStudentList = Gson().fromJson(responseJson,Array<PlacementStudentsResponseItem>::class.java)
+                    studentsList.addAll(selectedStudentList)
+                    mSelectedStudentsAdapter = SelectedStudentsAdapter(studentsList,this@CollegeDetailsActivity)
+                    binding.rvSelectedStudent.adapter = mSelectedStudentsAdapter
+                    mSelectedStudentsAdapter.notifyDataSetChanged()
+                }else {
+                    UtilsFunctions().handleErrorResponse(response, this@CollegeDetailsActivity)
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
     private fun apiGalleries(){
         val call: Call<ResponseBody> = RetrofitClient.getInstance(this@CollegeDetailsActivity).myApi
             .api_Galleries()
@@ -193,8 +277,13 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                if (response.isSuccessful){
                    val responseJson = response.body()?.string()
-                   val galleriesList = Gson().fromJson(responseJson, Array<GalleriesResponseItem>::class.java)
-                   Log.e(TAG, "onResponseGalleries: "+galleriesList.toString())
+                   val galleriesPhotoList = Gson().fromJson(responseJson, Array<GalleriesResponseItem>::class.java)
+                   galleriesList.clear()
+                   galleriesList.addAll(galleriesPhotoList)
+                   mCollegeGalleryAdapter = CollegeGalleryAdapter(galleriesList,this@CollegeDetailsActivity)
+                   binding.rvGallery.layoutManager = GridLayoutManager(this@CollegeDetailsActivity,3)
+                   binding.rvGallery.adapter = mCollegeGalleryAdapter
+                   mCollegeGalleryAdapter.notifyDataSetChanged()
 
                }else {
                    UtilsFunctions().handleErrorResponse(response, this@CollegeDetailsActivity)
@@ -538,14 +627,9 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
                 binding.llGovernanceView.visibility = View.GONE
                 binding.llGalleryView.visibility = View.GONE
 
+                apiFacilities()
 
-                mList3.clear()
-                mList3.add(FacilitiesItemModel("Facility 1"))
-                mList3.add(FacilitiesItemModel("Facility 2"))
 
-                mFacilitiesAdapter = FacilitiesAdapter(mList3, this)
-                binding.rvFacilities.adapter = mFacilitiesAdapter
-                mFacilitiesAdapter.notifyDataSetChanged()
             }
 
             R.id.tvPlacement -> {
@@ -604,19 +688,14 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
                 binding.llFacultyStreamView.visibility = View.GONE
                 binding.llEntranceExamView.visibility = View.GONE
                 binding.llFacilitiesView.visibility = View.GONE
-                binding.llPlacementView.visibility = View.VISIBLE
                 binding.llGovernanceView.visibility = View.GONE
                 binding.llGalleryView.visibility = View.GONE
 
 
-                mOurPartnerAdapter = OurPartnerAdapter(this)
-                binding.rvOurPartner.adapter = mOurPartnerAdapter
-                mOurPartnerAdapter.notifyDataSetChanged()
+                apiOurPartners()
+                apiStudents()
 
 
-                mSelectedStudentsAdapter = SelectedStudentsAdapter(this)
-                binding.rvSelectedStudent.adapter = mSelectedStudentsAdapter
-                mSelectedStudentsAdapter.notifyDataSetChanged()
 
             }
 
@@ -740,9 +819,7 @@ class CollegeDetailsActivity : AppCompatActivity(), View.OnClickListener {
                 binding.llGovernanceView.visibility = View.GONE
                 binding.llGalleryView.visibility = View.VISIBLE
                 apiGalleries()
-                mCollegeGalleryAdapter = CollegeGalleryAdapter(this)
-                binding.rvGallery.adapter = mCollegeGalleryAdapter
-                mCollegeGalleryAdapter.notifyDataSetChanged()
+
             }
 
             R.id.ivProfileImage -> {

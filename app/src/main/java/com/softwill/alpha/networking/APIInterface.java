@@ -276,6 +276,15 @@ public interface APIInterface {
     @GET("api/institute/entrance_exams")
     Call<ResponseBody> api_entranceExams();
 
+    @GET("/api/institute/facilities")
+    Call<ResponseBody> api_facilities();
+
+    @GET("/api/institute/placement/companies")
+    Call<ResponseBody> api_Our_Partners();
+
+    @GET("/api/institute/placement/students")
+    Call<ResponseBody> api_Students(@Query("id") int id);
+
     @GET("api/institute/galleries")
     Call<ResponseBody> api_Galleries();
 

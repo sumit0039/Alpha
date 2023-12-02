@@ -7,10 +7,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.softwill.alpha.institute_detail.model.FacilitiesItemModel
 import com.softwill.alpha.databinding.ItemFacilitiesBinding
+import com.softwill.alpha.institute_detail.model.facilities.FacilitiesResponseItem
+import com.softwill.alpha.utils.setResizableText
 
 
 class FacilitiesAdapter(
-    private var mList: ArrayList<FacilitiesItemModel>,
+    private var mList: ArrayList<FacilitiesResponseItem>,
     private val context: Context
 ) :
     RecyclerView.Adapter<FacilitiesAdapter.ViewHolder>() {
@@ -36,11 +38,12 @@ class FacilitiesAdapter(
         with(holder) {
             with(mList[position]) {
 
-                binding.tvName.text = name
+                binding.txtTitle.text = title
+                binding.txtDes.setResizableText(desc, 4, true)
 
-                mFacilities2Adapter = Facilities2Adapter( context)
-                binding.rvFacilities2.adapter = mFacilities2Adapter
-                mFacilities2Adapter.notifyDataSetChanged()
+//                mFacilities2Adapter = Facilities2Adapter( context)
+//                binding.rvFacilities2.adapter = mFacilities2Adapter
+//                mFacilities2Adapter.notifyDataSetChanged()
 
 
 
@@ -67,7 +70,7 @@ class FacilitiesAdapter(
     }
 
     //Filter New
-    fun filterList(filteredList: ArrayList<FacilitiesItemModel>) {
+    fun filterList(filteredList: ArrayList<FacilitiesResponseItem>) {
         mList = filteredList
         notifyDataSetChanged()
     }
