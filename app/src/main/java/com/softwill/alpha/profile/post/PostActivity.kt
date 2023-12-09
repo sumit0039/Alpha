@@ -15,6 +15,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.github.drjacky.imagepicker.ImagePicker
 import com.github.drjacky.imagepicker.constant.ImageProvider
 import com.softwill.alpha.R
@@ -39,7 +40,7 @@ class PostActivity : AppCompatActivity() {
     var mPostImageAdapter: PostImageAdapter? = null
     private val PERMISSION_CODE = 100
     var launcher: ActivityResultLauncher<Intent>? = null
-    val data = ArrayList<PostImageItemModel>()
+    val dataImage = ArrayList<PostImageItemModel>()
     var progressDialog: Dialog? = null
 
 
@@ -54,7 +55,7 @@ class PostActivity : AppCompatActivity() {
 
 
 
-        mPostImageAdapter = PostImageAdapter(data, applicationContext)
+        mPostImageAdapter = PostImageAdapter(dataImage, applicationContext)
         binding.rvPostImage.adapter = mPostImageAdapter
         mPostImageAdapter!!.notifyDataSetChanged()
 
@@ -66,7 +67,7 @@ class PostActivity : AppCompatActivity() {
                 val uri = result.data!!.data
                 var imagePath = uri!!.path?.let { File(it).toString() }
                 println("IMAGEPATH : $imagePath")
-                data.add(PostImageItemModel(imagePath.toString()))
+                dataImage.add(PostImageItemModel(imagePath.toString()))
                 mPostImageAdapter?.notifyDataSetChanged()
 
             } else if (result.resultCode == ImagePicker.RESULT_ERROR) {
@@ -78,8 +79,9 @@ class PostActivity : AppCompatActivity() {
 
     private fun onClickListener() {
         binding.etUpload.setOnClickListener {
-            if (data.size <= 2) {
-                askStoragePermission()
+            if (dataImage.size <= 2) {
+//                askStoragePermission()
+                getImageFromGalleryAndCamera()
             } else {
                 UtilsFunctions().showToast(this@PostActivity, "Max 3 Image upload")
             }
@@ -87,7 +89,7 @@ class PostActivity : AppCompatActivity() {
         }
 
         binding.btnShare.setOnClickListener {
-            if (data.isNotEmpty()) {
+            if (dataImage.isNotEmpty()) {
 
                 var value = binding.etTitle.text.toString().trim()
 
@@ -115,7 +117,35 @@ class PostActivity : AppCompatActivity() {
         }
 
     }
+    //open camera and gallery
+    private fun getImageFromGalleryAndCamera() {
+        com.github.dhaval2404.imagepicker.ImagePicker.with(this)
+            .crop() //Crop image(Optional), Check Customization for more option
+            .compress(1024) //Final image size will be less than 1 MB(Optional)
+            .maxResultSize(
+                1080,
+                1080
+            ) //Final image resolution will be less than 1080 x 1080(Optional)
+            .start()
 
+    }
+    //set image in imageview
+    @Override
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            // Get the url from data
+            val uri = data!!.data
+            var imagePath = uri!!.path?.let { File(it).toString() }
+            println("IMAGEPATH : $imagePath")
+            dataImage.add(PostImageItemModel(imagePath.toString()))
+            mPostImageAdapter?.notifyDataSetChanged()
+
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+        }
+
+    }
     private fun askStoragePermission() {
         if (ActivityCompat.checkSelfPermission(
                 applicationContext,
@@ -153,7 +183,7 @@ class PostActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                data.clear()
+                dataImage.clear()
                 finish()
                 return true
             }
@@ -170,7 +200,7 @@ class PostActivity : AppCompatActivity() {
         val fileToUpload: MutableList<MultipartBody.Part> = ArrayList()
 
 
-        for (image in data) {
+        for (image in dataImage) {
             var file = File(image.Image)
             val imageRequest: MultipartBody.Part = prepareFilePart("files", file)
             fileToUpload.add(imageRequest)

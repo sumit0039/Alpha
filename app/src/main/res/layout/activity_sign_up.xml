@@ -118,7 +118,7 @@
                     android:background="@drawable/bg_rounded_1"
                     android:digits="qwertyuioplkjhgfdsazxcvbnm QWERTYUIOPLKJHGFDSAZXCVBNM"
                     android:hint="Enter your first name"
-                    android:inputType="textPersonName"
+                    android:inputType="textCapSentences|textPersonName"
                     android:textColor="@color/black"
                     android:textColorHint="@color/gray_light"
                     android:textSize="18sp"
@@ -157,13 +157,71 @@
                     android:background="@drawable/bg_rounded_1"
                     android:digits="qwertyuioplkjhgfdsazxcvbnm QWERTYUIOPLKJHGFDSAZXCVBNM"
                     android:hint="Enter your last name"
-                    android:inputType="textPersonName"
+                    android:inputType="textCapSentences|textPersonName"
                     android:textColor="@color/black"
                     android:textColorHint="@color/gray_light"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView8"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/add_username"
+                    android:textColor="@color/gray_color"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@+id/textView7"
+                    app:layout_constraintTop_toBottomOf="@+id/etLastName" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginBottom="17dp"
+                    android:src="@drawable/ic_star"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                    app:layout_constraintStart_toEndOf="@+id/textView9" />
+
+                <ImageView
+                    android:id="@+id/ivInfo1"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:padding="10dp"
+                    android:src="@drawable/icon_info"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                    app:layout_constraintEnd_toEndOf="@+id/etUsername"
+                    app:layout_constraintTop_toTopOf="@+id/textView9"
+                    app:tint="@color/gray_color" />
+
+
+                <EditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/bg_rounded_1"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_light"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView9"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                <TextView
+                    android:id="@+id/tvValidUserName1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/invalid"
+                    android:textColor="@color/red"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/etUsername"
+                    app:layout_constraintTop_toBottomOf="@+id/etUsername" />
+
 
 
                 <TextView
@@ -175,7 +233,7 @@
                     android:textColor="@color/gray_color"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/textView7"
-                    app:layout_constraintTop_toBottomOf="@+id/etLastName" />
+                    app:layout_constraintTop_toBottomOf="@+id/etUsername" />
 
 
                 <ImageView

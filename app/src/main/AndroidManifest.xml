@@ -265,13 +265,16 @@
             android:exported="true" />
         <activity
             android:name=".signUp.SignUpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".otp.OTPActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".signIn.SignInActivity"
-            android:exported="true" />
+            android:exported="false"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".splash.SplashActivity"
             android:exported="true">

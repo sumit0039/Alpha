@@ -22,6 +22,7 @@
     <string name="email_address">Email address</string>
     <string name="email_address2">Email Address</string>
     <string name="institute_username">Institute username</string>
+    <string name="username">username</string>
     <string name="invalid">Invalid</string>
     <string name="uploaded">Uploaded</string>
     <string name="faculty">Faculty</string>
@@ -53,7 +54,7 @@
     <string name="unblock">Unblock</string>
     <string name="activate_deactivate">Activate/ Deactivate</string>
     <string name="change">Change</string>
-    <string name="username">Username</string>
+    <string name="add_username">Username</string>
     <string name="add_diary">Add Diary</string>
 
     <string name="edit_diary">Edit Diary</string>

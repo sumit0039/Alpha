@@ -300,12 +300,7 @@ class SignUpActivity : AppCompatActivity() {
         binding.spinnerFaculty.setSelection(0)
         binding.spinnerFaculty.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                adapterView: AdapterView<*>,
-                view: View,
-                pos: Int,
-                l: Long
-            ) {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, pos: Int, l: Long) {
                 val value = adapterView.getItemAtPosition(pos).toString()
                 binding.etFaculty.setText(binding.spinnerFaculty.selectedItem.toString())
 

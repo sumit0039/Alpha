@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -67,6 +68,7 @@ class EditProfileActivity : AppCompatActivity(), AchievementsAdapter.Achievement
 
     private val PERMISSION_CODE = 100
     var launcher: ActivityResultLauncher<Intent>? = null
+    private var imgFile: File? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -174,7 +176,8 @@ class EditProfileActivity : AppCompatActivity(), AchievementsAdapter.Achievement
 
 
         binding.ivProfileImage.setOnClickListener {
-            askStoragePermission()
+//            askStoragePermission()
+            getImageFromGalleryAndCamera()
         }
 
         binding.btnSaveInfo.setOnClickListener{
@@ -324,8 +327,39 @@ class EditProfileActivity : AppCompatActivity(), AchievementsAdapter.Achievement
             }
         }
     }
+    //open camera and gallery
+    private fun getImageFromGalleryAndCamera() {
+        com.github.dhaval2404.imagepicker.ImagePicker.with(this)
+            .crop() //Crop image(Optional), Check Customization for more option
+            .compress(1024) //Final image size will be less than 1 MB(Optional)
+            .maxResultSize(
+                1080,
+                1080
+            ) //Final image resolution will be less than 1080 x 1080(Optional)
+        .start()
+
+    }
+    //set image in imageview
+    @Override
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == AppCompatActivity.RESULT_OK) {
+            // Get the url from data
+                val uri = data!!.data
+                imagePath = uri?.path?.let { File(it).toString() }
+                println("IMAGEPATH : $imagePath")
+                Glide.with(this).load(imagePath).placeholder(R.drawable.icon_avatar).into(binding.ivProfileImage)
+
+                if(!imagePath.isNullOrEmpty()){
+                    apiCurrentUserChangeProfilePicture(imagePath)
+                }
 
 
+            } else if (resultCode == ImagePicker.RESULT_ERROR) {
+                Toast.makeText(this, getError(data), Toast.LENGTH_SHORT).show()
+            }
+
+    }
     private fun askStoragePermission() {
         if (ActivityCompat.checkSelfPermission(
                 applicationContext,
