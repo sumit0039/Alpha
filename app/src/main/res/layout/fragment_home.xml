@@ -59,13 +59,13 @@
                         android:src="@drawable/icon_notification" />
 
 
-                    <View
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/bg_rounded"
-                        android:backgroundTint="@color/red" />
+<!--                    <View-->
+<!--                        android:layout_width="10dp"-->
+<!--                        android:layout_height="10dp"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_margin="4dp"-->
+<!--                        android:background="@drawable/bg_rounded"-->
+<!--                        android:backgroundTint="@color/red" />-->
 
                 </RelativeLayout>
 

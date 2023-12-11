@@ -655,16 +655,7 @@ class HomeFragment : Fragment(), CallbackInterface, CommentAdapter.CommentCallba
         })
     }
 
-    private fun openPostImage(
-        title: String,
-        desc: String,
-        createdAt: String,
-        photosList: List<PhotoModel>,
-        id: Int,
-        name: String,
-        likes: Int,
-        comments: Int
-    ) {
+    private fun openPostImage(title: String, desc: String, createdAt: String, photosList: List<PhotoModel>, id: Int, name: String, likes: Int, comments: Int) {
 
         var inflater = LayoutInflater.from(context)
         var popupview = inflater.inflate(R.layout.popup_post, null, false)
